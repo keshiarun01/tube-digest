@@ -1,0 +1,97 @@
+/* ── TubeDigest custom styling ── */
+
+/* Tighten up default Streamlit padding */
+.block-container {
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+    max-width: 1100px;
+}
+
+/* Headers */
+h1, h2, h3 {
+    font-family: 'Outfit', 'DM Sans', system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+/* Sidebar tweaks */
+[data-testid="stSidebar"] {
+    background: #111117;
+    border-right: 1px solid #22222e;
+}
+[data-testid="stSidebar"] h2 {
+    color: #e4e2f0;
+    font-size: 1.3rem;
+}
+
+/* Info/success/warning callouts — softer backgrounds */
+div[data-baseweb="notification"] {
+    border-radius: 8px;
+}
+
+/* Flashcard styling */
+.flashcard {
+    background: #16161f;
+    border: 1px solid #2a2a38;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+    transition: border-color 0.2s;
+}
+.flashcard:hover {
+    border-color: #7c6cf0;
+}
+.flashcard-concept {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: #7c6cf0;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+.flashcard-question {
+    font-size: 15px;
+    font-weight: 500;
+    color: #e4e2f0;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+.flashcard-answer {
+    font-size: 14px;
+    color: #b4b2c4;
+    line-height: 1.6;
+    padding-top: 12px;
+    border-top: 1px solid #2a2a38;
+}
+
+/* Difficulty badges */
+.badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+.badge-beginner { background: #00b89422; color: #00b894; }
+.badge-intermediate { background: #fdcb6e22; color: #fdcb6e; }
+.badge-advanced { background: #e1705522; color: #e17055; }
+
+/* Cost pill */
+.cost-pill {
+    display: inline-block;
+    background: #7c6cf015;
+    color: #7c6cf0;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Hide Streamlit's default footer and menu */
+footer { visibility: hidden; }
+#MainMenu { visibility: hidden; }
+header { visibility: hidden; }

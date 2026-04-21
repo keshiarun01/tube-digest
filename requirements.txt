@@ -1,0 +1,42 @@
+# ── TubeDigest Production Requirements ─────────────────────────────
+# Python 3.11+
+
+# ── Core Web Framework ────────────────────────────────────────────
+streamlit>=1.38.0
+streamlit-player>=0.1.5
+
+# ── Environment & Config ──────────────────────────────────────────
+python-dotenv>=1.0.1
+
+# ── YouTube Transcript Extraction ─────────────────────────────────
+youtube-transcript-api>=1.0.0
+requests>=2.31.0
+
+# ── Cloudflare R2 / S3-Compatible Storage ─────────────────────────
+boto3>=1.34.0
+botocore>=1.34.0
+
+# ── Snowflake Data Warehouse ──────────────────────────────────────
+snowflake-connector-python>=3.6.0
+
+# ── dbt Transformations ───────────────────────────────────────────
+dbt-core>=1.7.0
+dbt-snowflake>=1.7.0
+
+# ── Protobuf Pin (required for dbt compatibility) ─────────────────
+# dbt-core crashes on protobuf >= 5.x with "MessageToJson() got an
+# unexpected keyword argument 'including_default_value_fields'"
+#protobuf<5
+
+# ── OpenAI LLM ────────────────────────────────────────────────────
+openai>=1.40.0
+tiktoken>=0.8.0
+tenacity>=8.2.0
+
+# ── RAG-Lite Q&A (TF-IDF similarity) ──────────────────────────────
+scikit-learn>=1.3.2
+numpy>=1.26.2
+
+# ── Testing ───────────────────────────────────────────────────────
+pytest>=7.4.3
+pytest-mock>=3.12.0

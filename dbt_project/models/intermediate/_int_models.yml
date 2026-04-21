@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: int_video_metadata
+    description: "One row per video with summary statistics"
+    columns:
+      - name: video_id
+        tests:
+          - unique
+          - not_null
+      - name: segment_count
+        tests:
+          - not_null
+
+  - name: int_transcript_chunks
+    description: "Transcript segments grouped into LLM-ready token-bounded chunks"
+    columns:
+      - name: video_id
+        tests:
+          - not_null
+      - name: chunk_index
+        tests:
+          - not_null
+      - name: chunk_text
+        tests:
+          - not_null
+      - name: chunk_token_estimate
+        tests:
+          - not_null

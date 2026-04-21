@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: stg_transcripts
+    description: "Cleaned transcript segments with parsed metadata and deduplication applied"
+    columns:
+      - name: video_id
+        description: "YouTube video ID"
+        tests:
+          - not_null
+      - name: segment_index
+        description: "Zero-indexed segment order"
+        tests:
+          - not_null
+      - name: text
+        description: "Cleaned transcript text"
+        tests:
+          - not_null
+      - name: start_time_seconds
+        description: "Start of segment in seconds"
+        tests:
+          - not_null
+      - name: end_time_seconds
+        description: "Computed end time (start + duration)"
+
+    tests:
+      - unique:
+          column_name: "(video_id || '-' || segment_index)"
+          config:
+            severity: error

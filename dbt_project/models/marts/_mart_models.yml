@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: mart_study_content
+    description: "LLM-ready chunks with full video context — input for OpenAI summarization"
+    columns:
+      - name: chunk_key
+        description: "Unique identifier combining video_id and chunk_index"
+        tests:
+          - unique
+          - not_null
+      - name: video_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('int_video_metadata')
+              field: video_id
+      - name: chunk_text
+        tests:
+          - not_null
+      - name: chunk_token_estimate
+        tests:
+          - not_null

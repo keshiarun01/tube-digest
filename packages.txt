@@ -1,0 +1,2 @@
+# System packages for Streamlit Cloud / Docker apt-get install
+# (none required for TubeDigest base functionality)
