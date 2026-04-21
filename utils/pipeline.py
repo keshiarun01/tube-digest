@@ -43,21 +43,20 @@ def _emit(status_cb: Optional[Callable], stage: str, detail: str = ""):
 def run_dbt_build() -> tuple[bool, str]:
     """
     Invoke `dbt build` as a subprocess from the dbt_project directory.
-
-    Returns (success, output). Treats the known protobuf 'MessageToJson'
-    logging bug as a success if dbt's output shows all models passed —
-    because the bug fires after all real work is done.
-
-    Returns:
-        (success_bool, combined_stdout_stderr)
     """
     if not DBT_PROJECT_DIR.exists():
         return False, f"dbt_project directory not found at {DBT_PROJECT_DIR}"
 
+    # Use the bundled profiles.yml so this works on Streamlit Cloud
+    profiles_dir = DBT_PROJECT_DIR / "profiles"
+
     try:
         result = subprocess.run(
-            ["dbt", "build"],
-            cwd=str(DBT_PROJECT_DIR),
+            [
+                "dbt", "build",
+                "--profiles-dir", str(profiles_dir),
+                "--project-dir", str(DBT_PROJECT_DIR),
+            ],
             capture_output=True,
             text=True,
             timeout=600,
@@ -69,12 +68,10 @@ def run_dbt_build() -> tuple[bool, str]:
 
     output = result.stdout + "\n" + result.stderr
 
-    # Happy path: dbt exited cleanly
     if result.returncode == 0:
         return True, output
 
-    # Known false-positive: protobuf MessageToJson telemetry bug fires
-    # AFTER all models and tests complete successfully. Detect it.
+    # Protobuf telemetry bug detection (from Phase 7 fix)
     protobuf_telemetry_bug = (
         "MessageToJson()" in output
         and "including_default_value_fields" in output
@@ -83,17 +80,11 @@ def run_dbt_build() -> tuple[bool, str]:
         "Completed successfully" in output
         or ("PASS=" in output and "ERROR=0" in output)
     )
-
     if protobuf_telemetry_bug and all_models_passed:
-        logger.warning(
-            "dbt hit the protobuf telemetry bug, but all models/tests passed. "
-            "Treating as success. Pin protobuf<5 to silence this."
-        )
+        logger.warning("dbt hit protobuf bug but models passed — treating as success")
         return True, output
 
-    # Real failure
     return False, output
-
 
 # ── Main Pipeline ─────────────────────────────────────────────────────────────
 
