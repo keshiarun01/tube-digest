@@ -13,7 +13,7 @@
 
 TubeDigest is an end-to-end AI-powered data pipeline that extracts transcripts from YouTube videos, processes them through a Cloudflare R2 → Snowflake → dbt lakehouse, and uses OpenAI GPT-4o to generate structured study guides, flashcards, practice questions, and an interactive Q&A. Built end-to-end in under 3 days as an interview-prep accelerator.
 
-**🔗 Live demo:** [tube-digest.streamlit.app]([https://tube-digest.streamlit.app](https://tube-digest-a9vromvkp57hpbe3czwuv7.streamlit.app/))
+**🔗 Live demo:** [tube-digest.streamlit.app](https://tube-digest-a9vromvkp57hpbe3czwuv7.streamlit.app/)
 **📦 Repo:** [github.com/keshiarun01/tube-digest](https://github.com/keshiarun01/tube-digest)
 
 ---
